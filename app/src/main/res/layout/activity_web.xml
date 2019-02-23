@@ -23,9 +23,9 @@
     </ListView>
 
     <Button
-        android:id="@+id/web_view_button"
+        android:id="@+id/web_search_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="VIEW CONTENT" />
+        android:text="SEARCH" />
 
 </LinearLayout>

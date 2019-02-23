@@ -47,11 +47,4 @@
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/web_list_item_flip"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@mipmap/ic_launcher" />
-
-
 </LinearLayout>
