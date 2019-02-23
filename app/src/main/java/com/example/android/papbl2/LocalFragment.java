@@ -10,6 +10,6 @@ public class LocalFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.local_fragment, container, false);
+        return inflater.inflate(R.layout.activity_local, container, false);
     }
 }

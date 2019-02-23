@@ -7,7 +7,7 @@ public class LocalActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.local_fragment);
+        setContentView(R.layout.activity_local);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, new LocalFragment())
                 .commit();

@@ -7,7 +7,7 @@ public class WebActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.web_fragment);
+        setContentView(R.layout.activity_web);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, new WebFragment())
                 .commit();
