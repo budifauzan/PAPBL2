@@ -8,8 +8,5 @@ public class MembersActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_members);
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, new GroupsFragment())
-                .commit();
     }
 }

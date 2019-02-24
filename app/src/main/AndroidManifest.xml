@@ -18,6 +18,8 @@
         <activity android:name=".MembersActivity" />
         <activity android:name=".WebListItem" />
         <activity android:name=".GroupsListItem" />
+        <activity android:name=".GroupsActivity" />
+        <activity android:name=".WebActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,8 +27,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".GroupsActivity" />
-        <activity android:name=".WebActivity" />
     </application>
 
 </manifest>

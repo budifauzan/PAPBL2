@@ -154,8 +154,7 @@ public class WebFragment extends Fragment {
                             base = jsonObj.getString("base");
 
                         } catch (final JSONException e) {
-                            Toast.makeText(rootView.getContext(), "Json parsing error: "
-                                    + e.getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(rootView.getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                             listView.setAdapter(null);
                             return;
                         }
