@@ -1,7 +1,7 @@
 package com.example.android.papbl2;
 
 public class ExchangeRates {
-    private String currency, date, base;
+    private String currency, date, base, exchangeArrow;
     private double rate;
 
     public ExchangeRates(String currency, String date, String base, double rate) {
@@ -9,6 +9,7 @@ public class ExchangeRates {
         this.date = date;
         this.base = base;
         this.rate = rate;
+        setExchangeArrow("→");
     }
 
     public String getCurrency() {
@@ -41,5 +42,13 @@ public class ExchangeRates {
 
     public void setRate(double rate) {
         this.rate = rate;
+    }
+
+    public String getExchangeArrow() {
+        return exchangeArrow;
+    }
+
+    public void setExchangeArrow(String exchangeArrow) {
+        this.exchangeArrow = exchangeArrow;
     }
 }

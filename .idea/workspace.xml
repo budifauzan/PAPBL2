@@ -15,8 +15,6 @@
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/papbl2/ExchangeRates.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/papbl2/ExchangeRates.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/papbl2/ExchangeRatesAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/papbl2/ExchangeRatesAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/android/papbl2/WebFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/android/papbl2/WebFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_web_list_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_web_list_item.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -60,14 +58,14 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gradle" value="57" />
-          <entry key="java" value="3813" />
+          <entry key="java" value="4399" />
           <entry key="xml" value="1255" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Groovy" value="57" />
-          <entry key="JAVA" value="3813" />
+          <entry key="JAVA" value="4399" />
           <entry key="XML" value="1255" />
         </counts>
       </usages-collector>
@@ -78,15 +76,16 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/papbl2/WebFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="164" column="77" lean-forward="true" selection-start-line="164" selection-start-column="77" selection-end-line="164" selection-end-column="77" />
+            <state relative-caret-position="243">
+              <caret line="159" column="35" lean-forward="true" selection-start-line="159" selection-start-column="35" selection-end-line="159" selection-end-column="35" />
               <folding>
-                <element signature="e#4078#8442#0" expanded="true" />
-                <element signature="e#7422#8408#0" expanded="true" />
-                <element signature="e#8407#8408#0" expanded="true" />
-                <element signature="e#8441#8442#0" expanded="true" />
-                <element signature="e#8000#8001#0" expanded="true" />
-                <element signature="e#8054#8055#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#4162#6610#0" expanded="true" />
+                <element signature="e#6609#6610#0" expanded="true" />
+                <element signature="e#6835#7568#0" expanded="true" />
+                <element signature="e#7567#7568#0" expanded="true" />
+                <element signature="e#7657#7658#0" expanded="true" />
+                <element signature="e#7711#7712#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -96,8 +95,8 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
           <provider editor-type-id="android-manifest" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="74" selection-start-line="5" selection-start-column="74" selection-end-line="5" selection-end-column="74" />
+            <state relative-caret-position="67">
+              <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="5" selection-end-column="78" />
             </state>
           </provider>
         </entry>
@@ -115,8 +114,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/papbl2/ExchangeRates.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="29" column="29" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
+            <state relative-caret-position="107">
+              <caret line="31" column="20" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="20" />
               <folding>
                 <element signature="e#277#278#0" expanded="true" />
                 <element signature="e#308#309#0" expanded="true" />
@@ -126,6 +125,7 @@
                 <element signature="e#499#500#0" expanded="true" />
                 <element signature="e#539#540#0" expanded="true" />
                 <element signature="e#571#572#0" expanded="true" />
+                <element signature="e#647#648#0" expanded="true" />
                 <element signature="e#674#675#0" expanded="true" />
                 <element signature="e#714#715#0" expanded="true" />
                 <element signature="e#746#747#0" expanded="true" />
@@ -133,6 +133,10 @@
                 <element signature="e#454#455#0" expanded="true" />
                 <element signature="e#494#495#0" expanded="true" />
                 <element signature="e#526#527#0" expanded="true" />
+                <element signature="e#915#916#0" expanded="true" />
+                <element signature="e#943#944#0" expanded="true" />
+                <element signature="e#985#986#0" expanded="true" />
+                <element signature="e#1019#1020#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -141,8 +145,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/papbl2/ExchangeRatesAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="362">
-              <caret line="40" selection-start-line="40" selection-end-line="41" selection-end-column="47" />
+            <state relative-caret-position="185">
+              <caret line="35" selection-start-line="35" selection-end-line="35" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -249,6 +253,11 @@
             <path>
               <item name="PAPBL2" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
+            </path>
+            <path>
+              <item name="PAPBL2" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="manifests" type="f94875db:AndroidManifestsGroupNode" />
             </path>
             <path>
               <item name="PAPBL2" type="1abcf292:AndroidViewProjectNode" />
@@ -538,14 +547,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="74" selection-start-line="5" selection-start-column="74" selection-end-line="5" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/papbl2/WebListItem.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -587,20 +588,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/papbl2/ExchangeRatesAdapter.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="40" selection-start-line="40" selection-end-line="41" selection-end-column="47" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="67">
+          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="5" selection-end-column="78" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/papbl2/ExchangeRates.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="29" column="29" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
+        <state relative-caret-position="107">
+          <caret line="31" column="20" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="20" />
           <folding>
             <element signature="e#277#278#0" expanded="true" />
             <element signature="e#308#309#0" expanded="true" />
@@ -610,6 +609,7 @@
             <element signature="e#499#500#0" expanded="true" />
             <element signature="e#539#540#0" expanded="true" />
             <element signature="e#571#572#0" expanded="true" />
+            <element signature="e#647#648#0" expanded="true" />
             <element signature="e#674#675#0" expanded="true" />
             <element signature="e#714#715#0" expanded="true" />
             <element signature="e#746#747#0" expanded="true" />
@@ -617,21 +617,36 @@
             <element signature="e#454#455#0" expanded="true" />
             <element signature="e#494#495#0" expanded="true" />
             <element signature="e#526#527#0" expanded="true" />
+            <element signature="e#915#916#0" expanded="true" />
+            <element signature="e#943#944#0" expanded="true" />
+            <element signature="e#985#986#0" expanded="true" />
+            <element signature="e#1019#1020#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/papbl2/ExchangeRatesAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="185">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/android/papbl2/WebFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="164" column="77" lean-forward="true" selection-start-line="164" selection-start-column="77" selection-end-line="164" selection-end-column="77" />
+        <state relative-caret-position="243">
+          <caret line="159" column="35" lean-forward="true" selection-start-line="159" selection-start-column="35" selection-end-line="159" selection-end-column="35" />
           <folding>
-            <element signature="e#4078#8442#0" expanded="true" />
-            <element signature="e#7422#8408#0" expanded="true" />
-            <element signature="e#8407#8408#0" expanded="true" />
-            <element signature="e#8441#8442#0" expanded="true" />
-            <element signature="e#8000#8001#0" expanded="true" />
-            <element signature="e#8054#8055#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#4162#6610#0" expanded="true" />
+            <element signature="e#6609#6610#0" expanded="true" />
+            <element signature="e#6835#7568#0" expanded="true" />
+            <element signature="e#7567#7568#0" expanded="true" />
+            <element signature="e#7657#7658#0" expanded="true" />
+            <element signature="e#7711#7712#0" expanded="true" />
           </folding>
         </state>
       </provider>

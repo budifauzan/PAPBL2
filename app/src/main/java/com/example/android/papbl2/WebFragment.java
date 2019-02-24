@@ -14,10 +14,8 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -29,7 +27,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class WebFragment extends Fragment {
     View rootView;
@@ -41,14 +38,20 @@ public class WebFragment extends Fragment {
     ProgressDialog progressDialog;
     String webContent, date, base;
     HttpURLConnection httpConn;
-    double mxn = 0, aud = 0, hkd = 0, ron = 0, hrk = 0, chf = 0, cad = 0, usd = 0, jpy = 0, brl = 0,
-            searchResult = 0;
+    int dataLength = 0;
+    String currency[] = {"MXN", "AUD", "HKD", "RON", "HRK", "CHF", "IDR", "CAD", "USD", "JPY", "BRL"
+            , "PHP", "CZK", "NOK", "INR", "PLN", "ISK", "MYR", "ZAR", "ILS", "GBP", "SGD", "HUF"
+            , "EUR", "CNY", "TRY", "SEK", "RUB", "NZD", "KRW", "THB", "BGN", "DKK"};
+    double exchangeRate[] = new double[33];
+    double searchResult = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.activity_web, container, false);
         search = rootView.findViewById(R.id.web_search_button);
         searchText = rootView.findViewById(R.id.web_search_edit_text);
+        //Specify the list view
+        listView = rootView.findViewById(R.id.web_list_view);
 
         rates = new ArrayList<>();
 
@@ -65,14 +68,13 @@ public class WebFragment extends Fragment {
 
         // Check for network connections
         if (networkInfo != null && networkInfo.isConnected()) {
-            
+
             // Create background thread to connect and get data
             new DownloadWebTask().execute(urlStr);
         } else {
             Toast.makeText(rootView.getContext(), "No network connection available.",
                     Toast.LENGTH_SHORT).show();
         }
-
 
     }
 
@@ -111,7 +113,6 @@ public class WebFragment extends Fragment {
             return webContent;
         }
 
-
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
@@ -128,16 +129,10 @@ public class WebFragment extends Fragment {
                             JSONObject jsonObj = new JSONObject(localResult);
                             // Getting JSON Array node
                             JSONObject rates = jsonObj.getJSONObject("rates");
-                            mxn = Double.valueOf(rates.getString("MXN"));
-                            aud = Double.valueOf(rates.getString("AUD"));
-                            hkd = Double.valueOf(rates.getString("HKD"));
-                            ron = Double.valueOf(rates.getString("RON"));
-                            hrk = Double.valueOf(rates.getString("HRK"));
-                            chf = Double.valueOf(rates.getString("CHF"));
-                            cad = Double.valueOf(rates.getString("CAD"));
-                            usd = Double.valueOf(rates.getString("USD"));
-                            jpy = Double.valueOf(rates.getString("JPY"));
-                            brl = Double.valueOf(rates.getString("BRL"));
+                            for (int i = 0; i < rates.length(); i++) {
+                                exchangeRate[i] = Double.valueOf(rates.getString(currency[i]));
+                            }
+                            dataLength = rates.length();
                             date = jsonObj.getString("date");
                             base = jsonObj.getString("base");
 
@@ -145,16 +140,9 @@ public class WebFragment extends Fragment {
                             Toast.makeText(rootView.getContext(), "Json parsing error: "
                                     + e.getMessage(), Toast.LENGTH_LONG).show();
                         }
-                        rates.add(new ExchangeRates("MXN", date, base, mxn));
-                        rates.add(new ExchangeRates("AUD", date, base, aud));
-                        rates.add(new ExchangeRates("HKD", date, base, hkd));
-                        rates.add(new ExchangeRates("RON", date, base, ron));
-                        rates.add(new ExchangeRates("HRK", date, base, hrk));
-                        rates.add(new ExchangeRates("CHF", date, base, chf));
-                        rates.add(new ExchangeRates("CAD", date, base, cad));
-                        rates.add(new ExchangeRates("USD", date, base, usd));
-                        rates.add(new ExchangeRates("JPY", date, base, jpy));
-                        rates.add(new ExchangeRates("BRL", date, base, brl));
+                        for (int i = 0; i < dataLength; i++) {
+                            rates.add(new ExchangeRates(currency[i], date, base, exchangeRate[i]));
+                        }
                     } else {
                         try {
                             JSONObject jsonObj = new JSONObject(localResult);
@@ -168,34 +156,29 @@ public class WebFragment extends Fragment {
                         } catch (final JSONException e) {
                             Toast.makeText(rootView.getContext(), "Json parsing error: "
                                     + e.getMessage(), Toast.LENGTH_LONG).show();
+                            listView.setAdapter(null);
+                            return;
                         }
                         rates.add(new ExchangeRates(searchText.getText().toString().toUpperCase()
                                 , date, base, searchResult));
                     }
                     adapter = new ExchangeRatesAdapter(getActivity(), rates);
 
-                    //Specify the list view
-                    listView = rootView.findViewById(R.id.web_list_view);
-
                     //Attaching the adapter to the list view
                     listView.setAdapter(adapter);
+                }
+            });
 
-                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            final TextView arrow = view.findViewById(R.id.web_list_item_arrow);
-                            final TextView rate = view.findViewById(R.id.web_list_item_rate);
-                            double exchangeRate = rates.get(position).getRate();
-                            if (arrow.getText().toString().equalsIgnoreCase("→")) {
-                                arrow.setText("←");
-                                exchangeRate = 1 / exchangeRate;
-                                rate.setText(String.format("%.2f", exchangeRate));
-                            } else {
-                                arrow.setText("→");
-                                rate.setText(String.format("%.10f", exchangeRate));
-                            }
-                        }
-                    });
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    if (rates.get(position).getExchangeArrow().equalsIgnoreCase("→")) {
+                        rates.get(position).setExchangeArrow("←");
+                    } else {
+                        rates.get(position).setExchangeArrow("→");
+                    }
+                    rates.get(position).setRate(1 / rates.get(position).getRate());
+                    listView.invalidateViews();
                 }
             });
 
@@ -205,7 +188,6 @@ public class WebFragment extends Fragment {
         protected void onProgressUpdate(Void... values) {
             super.onProgressUpdate(values);
         }
-
 
         private InputStream openHttpConnection(String urlStr) {
             InputStream in = null;
