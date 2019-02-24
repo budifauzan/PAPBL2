@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".GroupsDetailActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Detail"
+                android:text="Group's Name" />
+
+            <TextView
+                style="@style/Detail"
+                android:text="Group's Agency" />
+
+            <TextView
+                style="@style/Detail"
+                android:text="Debut Date" />
+
+            <TextView
+                style="@style/Detail"
+                android:text="Number of members" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Detail"
+                android:text=" : " />
+
+            <TextView
+                style="@style/Detail"
+                android:text=" : " />
+
+            <TextView
+                style="@style/Detail"
+                android:text=" : " />
+
+            <TextView
+                style="@style/Detail"
+                android:text=" : " />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/groups_detail_name"
+                style="@style/Detail"
+                tools:text="Twice" />
+
+            <TextView
+                android:id="@+id/groups_detail_agency"
+                style="@style/Detail"
+                tools:text="JYP Entertainment" />
+
+            <TextView
+                android:id="@+id/groups_detail_debut_date"
+                style="@style/Detail"
+                tools:text="20151020" />
+
+            <TextView
+                android:id="@+id/groups_detail_members"
+                style="@style/Detail"
+                tools:text="9" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/groups_detail_member_list_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="MEMBER LIST" />
+
+</LinearLayout>

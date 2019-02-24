@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".MembersDetailActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Detail"
+                android:text="Member's Group" />
+
+            <TextView
+                style="@style/Detail"
+                android:text="Birth Name" />
+
+            <TextView
+                style="@style/Detail"
+                android:text="Stage Name" />
+
+            <TextView
+                style="@style/Detail"
+                android:text="Birth Date" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Detail"
+                android:text=" : " />
+
+            <TextView
+                style="@style/Detail"
+                android:text=" : " />
+
+            <TextView
+                style="@style/Detail"
+                android:text=" : " />
+
+            <TextView
+                style="@style/Detail"
+                android:text=" : " />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/members_detail_group"
+                style="@style/Detail"
+                tools:text="Twice" />
+
+            <TextView
+                android:id="@+id/members_detail_birth_name"
+                style="@style/Detail"
+                tools:text="Chou Tzuyu" />
+
+            <TextView
+                android:id="@+id/members_detail_stage_name"
+                style="@style/Detail"
+                tools:text="Tzuyu" />
+
+            <TextView
+                android:id="@+id/members_detail_birth_date"
+                style="@style/Detail"
+                tools:text="19990614" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

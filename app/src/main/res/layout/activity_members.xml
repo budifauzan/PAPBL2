@@ -6,16 +6,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="2dp"
-    tools:context=".WebActivity">
+    tools:context=".MembersActivity">
 
     <EditText
-        android:id="@+id/web_search_edit_text"
+        android:id="@+id/local_members_search_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Search" />
 
     <ListView
-        android:id="@+id/web_list_view"
+        android:id="@+id/local_members_list_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
@@ -23,7 +23,7 @@
     </ListView>
 
     <Button
-        android:id="@+id/web_search_button"
+        android:id="@+id/local_members_search_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="VIEW DATA" />

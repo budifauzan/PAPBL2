@@ -6,10 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class LocalFragment extends Fragment {
+public class GroupsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.activity_local, container, false);
+       View rootView = inflater.inflate(R.layout.activity_groups, container, false);
+       return rootView;
     }
 }

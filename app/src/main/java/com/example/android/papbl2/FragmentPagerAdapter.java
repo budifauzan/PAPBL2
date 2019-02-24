@@ -15,7 +15,7 @@ public class FragmentPagerAdapter extends android.support.v4.app.FragmentPagerAd
             case 0:
                 return new WebFragment();
         }
-        return new LocalFragment();
+        return new GroupsFragment();
     }
 
     @Override

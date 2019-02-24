@@ -5,16 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".LocalFragment">
+    android:padding="2dp"
+    tools:context=".GroupsActivity">
 
     <EditText
-        android:id="@+id/local_search_edit_text"
+        android:id="@+id/local_groups_search_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Search" />
 
     <ListView
-        android:id="@+id/local_list_view"
+        android:id="@+id/local_groups_list_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
@@ -22,8 +23,9 @@
     </ListView>
 
     <Button
-        android:id="@+id/local_search_button"
+        android:id="@+id/local_groups_search_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="SEARCH" />
+        android:text="VIEW DATA" />
+
 </LinearLayout>

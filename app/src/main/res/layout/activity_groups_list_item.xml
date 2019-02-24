@@ -3,29 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="2dp"
-    tools:context=".WebActivity">
+    tools:context=".GroupsListItem">
 
-    <EditText
-        android:id="@+id/web_search_edit_text"
+    <TextView
+        android:id="@+id/list_item_groups_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Search" />
+        android:textColor="@android:color/black"
+        android:textSize="45sp"
+        tools:text="Twice" />
 
-    <ListView
-        android:id="@+id/web_list_view"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
-    </ListView>
-
-    <Button
-        android:id="@+id/web_search_button"
+    <TextView
+        android:id="@+id/list_item_groups_agency"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="VIEW DATA" />
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        tools:text="JYP Entertaintment" />
 
 </LinearLayout>

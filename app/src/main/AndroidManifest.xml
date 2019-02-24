@@ -12,8 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".WebListItem"></activity>
-        <activity android:name=".LocalListItem" />
+        <activity android:name=".MembersDetailActivity"></activity>
+        <activity android:name=".GroupsDetailActivity" />
+        <activity android:name=".MembersListItem" />
+        <activity android:name=".MembersActivity" />
+        <activity android:name=".WebListItem" />
+        <activity android:name=".GroupsListItem" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,7 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LocalActivity" />
+        <activity android:name=".GroupsActivity" />
         <activity android:name=".WebActivity" />
     </application>
 
