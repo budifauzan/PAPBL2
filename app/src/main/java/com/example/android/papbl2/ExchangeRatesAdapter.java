@@ -36,6 +36,12 @@ public class ExchangeRatesAdapter extends ArrayAdapter<ExchangeRates> {
         TextView currency = listItemView.findViewById(R.id.web_list_item_currency);
         currency.setText(currentRate.getCurrency());
 
+        TextView date = listItemView.findViewById(R.id.web_list_date);
+        date.setText(currentRate.getDate());
+
+        TextView base = listItemView.findViewById(R.id.web_list_item_base);
+        base.setText(currentRate.getBase());
+
         TextView rate = listItemView.findViewById(R.id.web_list_item_rate);;
         rate.setText(String.format ("%.10f", currentRate.getRate()));
 

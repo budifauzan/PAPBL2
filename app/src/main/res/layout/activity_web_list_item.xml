@@ -19,6 +19,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/web_list_item_base"
                 style="@style/ListItem"
                 android:text="IDR" />
 
@@ -34,16 +35,34 @@
 
         </LinearLayout>
 
-
-        <TextView
-            android:id="@+id/web_list_item_rate"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="23.5dp"
-            android:textColor="@android:color/black"
-            android:textSize="25sp"
-            android:gravity="center"
-            tools:text="0.0000712251" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/web_list_item_rate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:paddingLeft="20dp"
+                android:textColor="@android:color/black"
+                android:textSize="25sp"
+                tools:text="0.0000712251" />
+
+            <TextView
+                android:id="@+id/web_list_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:paddingRight="20dp"
+                android:textColor="@android:color/black"
+                android:textSize="25sp"
+                tools:text="2019-02-22" />
+        </LinearLayout>
+
 
     </LinearLayout>
 

@@ -16,6 +16,11 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,6 +29,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class WebFragment extends Fragment {
     View rootView;
@@ -33,8 +39,10 @@ public class WebFragment extends Fragment {
     Button search;
     ArrayList<ExchangeRates> rates;
     ProgressDialog progressDialog;
-    String webContent;
+    String webContent, date, base;
     HttpURLConnection httpConn;
+    double mxn = 0, aud = 0, hkd = 0, ron = 0, hrk = 0, chf = 0, cad = 0, usd = 0, jpy = 0, brl = 0,
+            searchResult = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,67 +52,25 @@ public class WebFragment extends Fragment {
 
         rates = new ArrayList<>();
 
-        rates.add(new ExchangeRates("USD", 0.0000712251));
-        rates.add(new ExchangeRates("EUR", 0.0000627976));
-        rates.add(new ExchangeRates("HKD", 0.0005590621));
-
-        adapter = new ExchangeRatesAdapter(getActivity(), rates);
-
-        //Specify the list view
-        listView = rootView.findViewById(R.id.web_list_view);
-
-        //Attaching the adapter to the list view
-        listView.setAdapter(adapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final TextView arrow = view.findViewById(R.id.web_list_item_arrow);
-                final TextView rate = view.findViewById(R.id.web_list_item_rate);
-                double exchangeRate = rates.get(position).getRate();
-                if (arrow.getText().toString().equalsIgnoreCase("→")) {
-                    arrow.setText("←");
-                    exchangeRate = 1 / exchangeRate;
-                    rate.setText(String.format("%.2f", exchangeRate));
-                } else {
-                    arrow.setText("→");
-                    rate.setText(String.format("%.10f", exchangeRate));
-                }
-            }
-        });
-
-        ArrayList<ExchangeRates> resultRates = new ArrayList<>();
-
-        search.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-//                for (int i = 0; i < rates.size(); i++) {
-//                    if (rates.get(i).getCurrency().startsWith(searchText.getText().toString().toUpperCase())) {
-//                        Toast.makeText(rootView.getContext(), rates.get(i).getCurrency(), Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-                downloadWebContent("https://api.exchangeratesapi.io/latest?base=IDR");
-            }
-        });
-
+        downloadWebContent("https://api.exchangeratesapi.io/latest?base=IDR");
 
         return rootView;
     }
 
     private void downloadWebContent(String urlStr) {
 
-        ConnectivityManager connMgr = (ConnectivityManager) rootView.getContext().getSystemService(rootView.getContext().CONNECTIVITY_SERVICE);
+        ConnectivityManager connMgr = (ConnectivityManager) rootView.getContext()
+                .getSystemService(rootView.getContext().CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
         // Check for network connections
-
         if (networkInfo != null && networkInfo.isConnected()) {
+            
             // Create background thread to connect and get data
-
             new DownloadWebTask().execute(urlStr);
         } else {
-            Toast.makeText(rootView.getContext(), "No network connection available.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(rootView.getContext(), "No network connection available.",
+                    Toast.LENGTH_SHORT).show();
         }
 
 
@@ -120,10 +86,8 @@ public class WebFragment extends Fragment {
             progressDialog.show();
         }
 
-
         @Override
         protected String doInBackground(String... params) {
-
 
             String url = params[0];
             InputStream in;
@@ -151,9 +115,89 @@ public class WebFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Toast.makeText(rootView.getContext(), result, Toast.LENGTH_SHORT).show();
+            final String localResult = result;
             httpConn.disconnect();
             progressDialog.dismiss();
+            search.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    rates.clear();
+                    search.setText("Search");
+                    if (searchText.getText().toString().equalsIgnoreCase("")) {
+                        try {
+                            JSONObject jsonObj = new JSONObject(localResult);
+                            // Getting JSON Array node
+                            JSONObject rates = jsonObj.getJSONObject("rates");
+                            mxn = Double.valueOf(rates.getString("MXN"));
+                            aud = Double.valueOf(rates.getString("AUD"));
+                            hkd = Double.valueOf(rates.getString("HKD"));
+                            ron = Double.valueOf(rates.getString("RON"));
+                            hrk = Double.valueOf(rates.getString("HRK"));
+                            chf = Double.valueOf(rates.getString("CHF"));
+                            cad = Double.valueOf(rates.getString("CAD"));
+                            usd = Double.valueOf(rates.getString("USD"));
+                            jpy = Double.valueOf(rates.getString("JPY"));
+                            brl = Double.valueOf(rates.getString("BRL"));
+                            date = jsonObj.getString("date");
+                            base = jsonObj.getString("base");
+
+                        } catch (final JSONException e) {
+                            Toast.makeText(rootView.getContext(), "Json parsing error: "
+                                    + e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                        rates.add(new ExchangeRates("MXN", date, base, mxn));
+                        rates.add(new ExchangeRates("AUD", date, base, aud));
+                        rates.add(new ExchangeRates("HKD", date, base, hkd));
+                        rates.add(new ExchangeRates("RON", date, base, ron));
+                        rates.add(new ExchangeRates("HRK", date, base, hrk));
+                        rates.add(new ExchangeRates("CHF", date, base, chf));
+                        rates.add(new ExchangeRates("CAD", date, base, cad));
+                        rates.add(new ExchangeRates("USD", date, base, usd));
+                        rates.add(new ExchangeRates("JPY", date, base, jpy));
+                        rates.add(new ExchangeRates("BRL", date, base, brl));
+                    } else {
+                        try {
+                            JSONObject jsonObj = new JSONObject(localResult);
+                            // Getting JSON Array node
+                            JSONObject rates = jsonObj.getJSONObject("rates");
+                            searchResult = Double.valueOf(rates.getString(searchText.getText()
+                                    .toString().toUpperCase()));
+                            date = jsonObj.getString("date");
+                            base = jsonObj.getString("base");
+
+                        } catch (final JSONException e) {
+                            Toast.makeText(rootView.getContext(), "Json parsing error: "
+                                    + e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                        rates.add(new ExchangeRates(searchText.getText().toString().toUpperCase()
+                                , date, base, searchResult));
+                    }
+                    adapter = new ExchangeRatesAdapter(getActivity(), rates);
+
+                    //Specify the list view
+                    listView = rootView.findViewById(R.id.web_list_view);
+
+                    //Attaching the adapter to the list view
+                    listView.setAdapter(adapter);
+
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            final TextView arrow = view.findViewById(R.id.web_list_item_arrow);
+                            final TextView rate = view.findViewById(R.id.web_list_item_rate);
+                            double exchangeRate = rates.get(position).getRate();
+                            if (arrow.getText().toString().equalsIgnoreCase("→")) {
+                                arrow.setText("←");
+                                exchangeRate = 1 / exchangeRate;
+                                rate.setText(String.format("%.2f", exchangeRate));
+                            } else {
+                                arrow.setText("→");
+                                rate.setText(String.format("%.10f", exchangeRate));
+                            }
+                        }
+                    });
+                }
+            });
 
         }
 
@@ -165,7 +209,7 @@ public class WebFragment extends Fragment {
 
         private InputStream openHttpConnection(String urlStr) {
             InputStream in = null;
-            int resCode = -1;
+            int resCode;
 
             try {
                 URL url = new URL(urlStr);
