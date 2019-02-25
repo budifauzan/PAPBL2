@@ -51,7 +51,7 @@ public class GroupsFragment extends Fragment {
 
         groups = new ArrayList<>();
 
-        downloadWebContent("http://192.168.43.139/PAPBL/PAPBL2/web_service.php");
+        downloadWebContent("http://" + new IPAddress().getIpAddress() + "/PAPBL/PAPBL2/web_service.php");
 
         return rootView;
     }
@@ -110,48 +110,32 @@ public class GroupsFragment extends Fragment {
         }
 
         @Override
-        protected void onPostExecute(String result) {
+        protected void onPostExecute(final String result) {
             super.onPostExecute(result);
             final String localResult = result;
             httpConn.disconnect();
             progressDialog.dismiss();
+            showAllData(result);
             search.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     groups.clear();
                     search.setText("Search");
                     if (searchText.getText().toString().equalsIgnoreCase("")) {
-                        try {
-                            JSONObject jsonObj = new JSONObject(localResult);
-                            JSONArray groupsArr = jsonObj.getJSONArray("Groups");
-                            for (int i = 0; i < groupsArr.length(); i++) {
-                                JSONObject g = groupsArr.getJSONObject(i);
-                                int idGroup = Integer.valueOf(g.getString("IdGroup"));
-                                String namaGroup = g.getString("NamaGroup");
-                                String agensi = g.getString("Agensi");
-                                String tanggalDebut = g.getString("TanggalDebut");
-                                String jumlahMember = g.getString("JumlahMember");
-                                groups.add(new Groups(idGroup, namaGroup, agensi, tanggalDebut, jumlahMember));
-                            }
-
-                        } catch (final JSONException e) {
-                            Toast.makeText(rootView.getContext(), "Json parsing error: "
-                                    + e.getMessage(), Toast.LENGTH_LONG).show();
-                        }
+                        showAllData(result);
                     } else {
                         try {
                             JSONObject jsonObj = new JSONObject(localResult);
                             JSONArray groupsArr = jsonObj.getJSONArray("Groups");
                             for (int i = 0; i < groupsArr.length(); i++) {
                                 JSONObject g = groupsArr.getJSONObject(i);
-                                if (searchText.getText().toString().equalsIgnoreCase(g.getString("NamaGroup"))) {
+                                if (g.getString("NamaGroup").toLowerCase().contains(searchText.getText().toString())) {
                                     int idGroup = Integer.valueOf(g.getString("IdGroup"));
                                     String namaGroup = g.getString("NamaGroup");
                                     String agensi = g.getString("Agensi");
                                     String tanggalDebut = g.getString("TanggalDebut");
                                     String jumlahMember = g.getString("JumlahMember");
                                     groups.add(new Groups(idGroup, namaGroup, agensi, tanggalDebut, jumlahMember));
-                                    break;
                                 }
                             }
                             if (groups.isEmpty()) {
@@ -177,7 +161,7 @@ public class GroupsFragment extends Fragment {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Intent intent = new Intent(rootView.getContext(), GroupsDetailActivity.class);
-                    intent.putExtra("id", groups.get(position).getId());
+                    intent.putExtra("id", String.valueOf(groups.get(position).getId()));
                     intent.putExtra("namaGroup", groups.get(position).getNamaGroup());
                     intent.putExtra("agensiGroup", groups.get(position).getAgensi());
                     intent.putExtra("tanggalDebut", groups.get(position).getTanggalDebut());
@@ -225,6 +209,30 @@ public class GroupsFragment extends Fragment {
                 Log.e("Error", "openHttpConnection: host not reach", e);
             }
             return in;
+        }
+
+        private void showAllData(String result) {
+            try {
+                JSONObject jsonObj = new JSONObject(result);
+                JSONArray groupsArr = jsonObj.getJSONArray("Groups");
+                for (int i = 0; i < groupsArr.length(); i++) {
+                    JSONObject g = groupsArr.getJSONObject(i);
+                    int idGroup = Integer.valueOf(g.getString("IdGroup"));
+                    String namaGroup = g.getString("NamaGroup");
+                    String agensi = g.getString("Agensi");
+                    String tanggalDebut = g.getString("TanggalDebut");
+                    String jumlahMember = g.getString("JumlahMember");
+                    groups.add(new Groups(idGroup, namaGroup, agensi, tanggalDebut, jumlahMember));
+                }
+
+            } catch (final JSONException e) {
+                Toast.makeText(rootView.getContext(), "Json parsing error: "
+                        + e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+            adapter = new GroupsAdapter(getActivity(), groups);
+
+            //Attaching the adapter to the list view
+            listView.setAdapter(adapter);
         }
 
 

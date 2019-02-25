@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class GroupsDetailActivity extends AppCompatActivity {
+    String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,11 +22,11 @@ public class GroupsDetailActivity extends AppCompatActivity {
         TextView jumlahMember = findViewById(R.id.groups_detail_members);
 
         Intent intent = getIntent();
-        String namaGroupS = intent.getStringExtra("namaGroup");
+        final String namaGroupS = intent.getStringExtra("namaGroup");
         String agensiGroupS = intent.getStringExtra("agensiGroup");
         String tanggalDebutS = intent.getStringExtra("tanggalDebut");
         String jumlahMemberS = intent.getStringExtra("jumlahMember");
-        String id = intent.getStringExtra("id");
+        id = intent.getStringExtra("id");
 
         namaGroup.setText(namaGroupS);
         agensiGroup.setText(agensiGroupS);
@@ -36,6 +37,8 @@ public class GroupsDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(GroupsDetailActivity.this, MembersActivity.class);
+                intent.putExtra("idGroup", id);
+                intent.putExtra("namaGroup", namaGroupS);
                 startActivity(intent);
             }
         });

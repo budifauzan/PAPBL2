@@ -114,52 +114,37 @@ public class WebFragment extends Fragment {
         }
 
         @Override
-        protected void onPostExecute(String result) {
+        protected void onPostExecute(final String result) {
             super.onPostExecute(result);
             final String localResult = result;
             httpConn.disconnect();
             progressDialog.dismiss();
+            showAllData(result);
             search.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     rates.clear();
-                    search.setText("Search");
                     if (searchText.getText().toString().equalsIgnoreCase("")) {
-                        try {
-                            JSONObject jsonObj = new JSONObject(localResult);
-                            // Getting JSON Array node
-                            JSONObject rates = jsonObj.getJSONObject("rates");
-                            for (int i = 0; i < rates.length(); i++) {
-                                exchangeRate[i] = Double.valueOf(rates.getString(currency[i]));
-                            }
-                            dataLength = rates.length();
-                            date = jsonObj.getString("date");
-                            base = jsonObj.getString("base");
-
-                        } catch (final JSONException e) {
-                            Toast.makeText(rootView.getContext(), "Json parsing error: "
-                                    + e.getMessage(), Toast.LENGTH_LONG).show();
-                        }
-                        for (int i = 0; i < dataLength; i++) {
-                            rates.add(new ExchangeRates(currency[i], date, base, exchangeRate[i]));
-                        }
+                        showAllData(result);
                     } else {
                         try {
                             JSONObject jsonObj = new JSONObject(localResult);
                             // Getting JSON Array node
-                            JSONObject rates = jsonObj.getJSONObject("rates");
-                            searchResult = Double.valueOf(rates.getString(searchText.getText()
-                                    .toString().toUpperCase()));
-                            date = jsonObj.getString("date");
-                            base = jsonObj.getString("base");
+                            JSONObject ratesObj = jsonObj.getJSONObject("rates");
+                            for (int i = 0; i < currency.length; i++) {
+                                if (currency[i].toLowerCase().contains(searchText.getText().toString())) {
+                                    searchResult = Double.valueOf(ratesObj.getString(currency[i]));
+                                    date = jsonObj.getString("date");
+                                    base = jsonObj.getString("base");
+                                    rates.add(new ExchangeRates(currency[i], date, base, searchResult));
+                                }
+                            }
 
                         } catch (final JSONException e) {
                             Toast.makeText(rootView.getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
                             listView.setAdapter(null);
                             return;
                         }
-                        rates.add(new ExchangeRates(searchText.getText().toString().toUpperCase()
-                                , date, base, searchResult));
                     }
                     adapter = new ExchangeRatesAdapter(getActivity(), rates);
 
@@ -222,6 +207,30 @@ public class WebFragment extends Fragment {
             return in;
         }
 
+        private void showAllData(String result) {
+            try {
+                JSONObject jsonObj = new JSONObject(result);
+                // Getting JSON Array node
+                JSONObject rates = jsonObj.getJSONObject("rates");
+                for (int i = 0; i < rates.length(); i++) {
+                    exchangeRate[i] = Double.valueOf(rates.getString(currency[i]));
+                }
+                dataLength = rates.length();
+                date = jsonObj.getString("date");
+                base = jsonObj.getString("base");
+
+            } catch (final JSONException e) {
+                Toast.makeText(rootView.getContext(), "Json parsing error: "
+                        + e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+            for (int i = 0; i < dataLength; i++) {
+                rates.add(new ExchangeRates(currency[i], date, base, exchangeRate[i]));
+            }
+            adapter = new ExchangeRatesAdapter(getActivity(), rates);
+
+            //Attaching the adapter to the list view
+            listView.setAdapter(adapter);
+        }
 
     }
 
